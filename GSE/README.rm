@@ -1,0 +1,36 @@
+DecodeHK.py ---------------
+will take in a csv then parse out values and check them versus their nominal values. 
+If errors are found it will create an error log with the recorded values and their index in the file. 
+
+To run the code, adjust the input csv to match the data provided and the reference name to be a human language understanding of 
+the test. ex. 'Post_Vibe_Sequence'
+
+- Important: Input data NEEDS to be in HEX 
+
+- Important: When looking at the values printed in the output, these are stepped down Voltages fed into the ADC. The expected values
+are in the code under 'expected_vals' or below [LAST UPDATED: 10/23/25]
+expected_vals = {
+    "FPGA_v": 2,
+    "Counter": 0,
+    "P5V_VMON": 1.967,
+    "N5V_VMON": 1.623,
+    "P15V_VMON": 1.949,
+    "N15V_VMON": 1.991,
+    "P24V_VMON": 2.185,
+    "P15V_IMON": 0.282,
+    "N15V_IMON": 2.127,
+    "P24V_IMON": 0.119,
+    "P28V_IMON": 0.884,
+    "P28V_VMON": 1.797,
+    "P5V_IMON": 0.707,
+    "N5V_IMON": 3.263,
+    "3v3_IMON": 0.417,
+    "1v5_IMON": 0.587,
+    "3v3_VMON": 3.3,
+    "2v5_VMON": 2.5,
+    "1v5_VMON": 1.559
+}
+
+
+printLRData.py ---------------
+This code is still being worked on do not use. 
