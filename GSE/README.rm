@@ -1,9 +1,21 @@
-DecodeHK.py ---------------
+DecodeHK.py  (Python 3.12.4) ---------------
 will take in a csv then parse out values and check them versus their nominal values. 
 If errors are found it will create an error log with the recorded values and their index in the file. 
 
-To run the code, adjust the input csv to match the data provided and the reference name to be a human language understanding of 
-the test. ex. 'Post_Vibe_Sequence'
+To install dependencies run in a terminal or enviroment:
+pip install -r requirements.txt
+
+To run the code do the following:
+1. Drop HK_HEX file into inputs folder
+2. Adjust the input csv to match the path to the data provided (hint right click in VSCode and hit 'Copy Relative Path')
+3. Change the reference name to be a human language understanding of the test. 
+    - ex. 'Post_Vibe_Sequence_No_Fire'
+4. Hit Run 
+5. Look at Terminal output:
+    -If good: "No errors found, yay!"
+    -If bad: "Errors were found, error log saved"
+        - Look at 'ErrorReport.csv'
+6. Output file will be saved to Output/Filename.csv
 
 - Important: Input data NEEDS to be in HEX 
 

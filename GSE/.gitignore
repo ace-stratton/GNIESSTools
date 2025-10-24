@@ -1,1 +1,2 @@
 *.csv
+!*/S2_UCB_HK_HEX_test_file.csv

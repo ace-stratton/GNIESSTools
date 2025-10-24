@@ -14,9 +14,9 @@ V2.0 - 10/23/25
 INPUTS -- CHANGE THESE AS NEEDED
 """
 ##################### Begin Inputs ##################################
-HKFILENAME = 'S2_UCB_HK_HEX_sine_test.csv'
+HKFILENAME = 'Input\S2_UCB_HK_HEX_sine_test.csv'
 YEAR = 2025
-OUTPUT_FILE_ID = 'FPGASineWaveTest'
+OUTPUT_FILE_ID = 'FPGASineWaveTest' #Human friendly name of test
 FPGA_Version = 2
 ##################### End Inputs ##################################
 
