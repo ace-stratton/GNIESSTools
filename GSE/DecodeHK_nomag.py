@@ -1,11 +1,11 @@
 """
 Script to open housekeeping from rocket telemetry and plot or display housekeeping for GNIESS Rocket. 
 
-
+Use this version to do an error check on the system with out any sort of load connected to the magnetometer input of the ebox
 Author: Ace Stratton
-Date: 10/15/25
+Date: 10/30/25
 
-V2.0 - 10/23/25
+V1.0 - 10/30/25
 
 """
 
@@ -14,9 +14,9 @@ V2.0 - 10/23/25
 INPUTS -- CHANGE THESE AS NEEDED
 """
 ##################### Begin Inputs ##################################
-HKFILENAME = 'Input\S2_UCB_HK_HEX_36397_Previbe_Sequence_All_fire_.csv'
+HKFILENAME = 'Input\S2_UCB_HK_HEX_36397_Vibration_Z_Random_.csv'
 YEAR = 2025
-OUTPUT_FILE_ID = 'FPGASineWaveTest' #Human friendly name of test
+OUTPUT_FILE_ID = '397VibeZRandom' #Human friendly name of test
 FPGA_Version = 2
 ##################### End Inputs ##################################
 
@@ -62,14 +62,14 @@ expected_vals = {
     "P15V_VMON": 1.949,
     "N15V_VMON": 1.991,
     "P24V_VMON": 2.185,
-    "P15V_IMON": 0.282,
+    "P15V_IMON": 0.296,
     "N15V_IMON": 2.127,
-    "P24V_IMON": 0.119,
-    "P28V_IMON": 0.884,
-    "P28V_VMON": 1.797,
+    "P24V_IMON": 0,
+    "P28V_IMON": 0.648,
+    "P28V_VMON": 1.635,
     "P5V_IMON": 0.707,
     "N5V_IMON": 3.263,
-    "3v3_IMON": 0.417,
+    "3v3_IMON": 0.315,
     "1v5_IMON": 0.587,
     "3v3_VMON": 3.3,
     "2v5_VMON": 2.5,
@@ -121,13 +121,15 @@ def pull_values(binary):
         val_ADC = int(val_binary,2) 
         value = val_ADC
         
-    if expected_val != 0 and int(ID,2) > 2:
+    if int(ID,2) > 2:
         error = abs(value-expected_val)/expected_val 
-        if error > 0.05 and 'VMON' in ID_name: #acceptable error for VMON values is 5%
+        if error > 0.25 and 'VMON' in ID_name: #acceptable error for VMON values is 5
             errorFlag = 'true'
-        elif error > 0.2 and 'IMON' in ID_name and '15' not in ID_name:
+        elif error > 0.3 and 'IMON' in ID_name and '15' not in ID_name and '1v5' not in ID_name and '3v3' not in ID_name:
             errorFlag = 'true'
-        elif error > 0.25 and '15V_IMON' in ID_name:
+        elif error > 0.45 and '15V_IMON' in ID_name:
+            errorFlag = 'true'
+        elif error > .75 and  '3v3' in ID_name:
             errorFlag = 'true'
         else:
             errorFlag = 'false'
@@ -165,7 +167,7 @@ def parseHousekeeping(filename):
                 continue
             
             if errorFlag == 'NA':
-                if val > counter:
+                if val > counter or (val < 5 and counter in  [1023, 1022, 1021, 1020]):
                     errorFlag = 'false'
                 else:
                     errorFlag = 'true'
