@@ -1,0 +1,4 @@
+Pin Name GPIO
+16 Load 23
+18 CLK 24
+15 MJF 22

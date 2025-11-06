@@ -1,0 +1,9 @@
+pigs wvtx 0
+pigs wvclr
+
+stop transmit
+then clear all waves
+
+
+to enable pins for write read:
+pigs m 23 w (BCM) 
