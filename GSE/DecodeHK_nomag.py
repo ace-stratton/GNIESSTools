@@ -14,10 +14,10 @@ V1.0 - 10/30/25
 INPUTS -- CHANGE THESE AS NEEDED
 """
 ##################### Begin Inputs ##################################
-HKFILENAME = 'Input\S2_UCB_HK_HEX_36397_Vibration_Z_Random_.csv'
+HKFILENAME = 'Input\R_398_S2_UCB_HK_HEX_Board_Repaired_Handshake.csv'
 YEAR = 2025
-OUTPUT_FILE_ID = '397VibeZRandom' #Human friendly name of test
-FPGA_Version = 2
+OUTPUT_FILE_ID = '398Board_Repaired_Handshake' #Human friendly name of test
+FPGA_Version = 5
 ##################### End Inputs ##################################
 
 # DO NOT EDIT ANYTHING PAST THIS POINT
