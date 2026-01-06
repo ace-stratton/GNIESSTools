@@ -14,9 +14,10 @@ V1.0 - 11/13/25
 INPUTS -- CHANGE THESE AS NEEDED
 """
 ##################### Begin Inputs ##################################
-HKFILENAME = 'WFFInputFiles\R_398_Mag_Cal_Zero_Facing_West.csv'
+HKFILENAME = 'WFFInputFiles\R_398_Mag_Cal_Zero_Facing_South.csv'
 SELECTED_CH = 'All'
 NUM_SAMPLES = 800000
+saveMag = True
 ##################### End Inputs ##################################
 
 import csv
@@ -128,6 +129,23 @@ with open(HKFILENAME, newline='') as f:
             manager = plt.get_current_fig_manager()
             manager.full_screen_toggle()  # enter fullscreen
             plt.savefig(f"GeneratedPlots/{title}.png", dpi=300)
+
+            if saveMag:
+                with open(f'GeneratedFiles/{title}.csv', 'w', newline="") as f:
+                    fieldnames = ['time_bx', 'bx', 'time_by', 'by', 'time_bz', 'bz']
+                    writer = csv.DictWriter(f, fieldnames=fieldnames, delimiter=',')
+                    writer.writeheader()
+                    indx = 0
+                    for indx in range(NUM_SAMPLES):
+                        row = {
+                                'time_bx': times[0,indx], 
+                                'bx': vals[0,indx], 
+                                'time_by': times[1,indx], 
+                                'by': vals[1,indx], 
+                                'time_bz': times[2, indx], 
+                                'bz': vals[2,indx]
+                            }
+                        writer.writerow(row)
 
 
 
