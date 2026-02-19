@@ -14,10 +14,11 @@ V1.0 - 11/13/25
 INPUTS -- CHANGE THESE AS NEEDED
 """
 ##################### Begin Inputs ##################################
-HKFILENAME = 'WFFInputFiles\R_398_Mag_Cal_Zero_Facing_South.csv'
+HKFILENAME = 'WFFInputFiles\S1_UCB_LR_HEX_36398_Flight_8M_Antenna_.csv'
 SELECTED_CH = 'All'
-NUM_SAMPLES = 800000
-saveMag = True
+NUM_SAMPLES = 7000000#6091897 #97
+saveMag = False
+t0 = 3579570 #3579540 #397
 ##################### End Inputs ##################################
 
 import csv
@@ -62,7 +63,7 @@ with open(HKFILENAME, newline='') as f:
                 if idx == 9:
                     idx = 0
                     continue
-                timestamp = round(float(row[0]), 5)
+                timestamp = round(float(row[0]), 5) - t0
                 if HKFILENAME[0] == 'S':    
                     data_ch = int(row[3], 16)
                 elif HKFILENAME[0] == 'W':
@@ -71,7 +72,7 @@ with open(HKFILENAME, newline='') as f:
                 idx = idx + 1
                 count = count + 1
 
-                if count == NUM_SAMPLES*9:
+                if count == NUM_SAMPLES:
                     break
 
             else:
@@ -127,7 +128,7 @@ with open(HKFILENAME, newline='') as f:
             fig.supylabel("Counts")
             fig.tight_layout()
             manager = plt.get_current_fig_manager()
-            manager.full_screen_toggle()  # enter fullscreen
+            #manager.full_screen_toggle()  # enter fullscreen
             plt.savefig(f"GeneratedPlots/{title}.png", dpi=300)
 
             if saveMag:
